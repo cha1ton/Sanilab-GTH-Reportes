@@ -66,6 +66,59 @@ const carrerasMap = {
   "software": "Desarrollo de Software",
 };
 
+// NUEVA: Normalización de Fuentes de Captación
+const fuentesMap = {
+  "linkedin": "LinkedIn",
+  "linked in": "LinkedIn",
+  
+  "whatsapp": "WhatsApp",
+  "whats app": "WhatsApp",
+  "wp": "WhatsApp",
+  
+  "facebook": "Facebook",
+  "fb": "Facebook",
+  
+  "redes sociales": "Redes sociales",
+  "red social": "Redes sociales",
+  "instagram": "Redes sociales",
+  "ig": "Redes sociales",
+  "twitter": "Redes sociales",
+  "tiktok": "Redes sociales",
+  
+  "feria laboral": "Feria laboral",
+  "feria de empleo": "Feria laboral",
+  "feria": "Feria laboral",
+  
+  "recomendación personal": "Recomendación personal",
+  "recomendacion personal": "Recomendación personal",
+  "amigo": "Recomendación personal",
+  "familiar": "Recomendación personal",
+  "referido": "Recomendación personal",
+  "referencia": "Recomendación personal",
+  
+  "evento": "Evento / networking",
+  "networking": "Evento / networking",
+  "evento networking": "Evento / networking",
+  "conferencia": "Evento / networking",
+  
+  "organización": "Organización / institución",
+  "organizacion": "Organización / institución",
+  "institución": "Organización / institución",
+  "institucion": "Organización / institución",
+  "universidad": "Organización / institución",
+  
+  "programa": "Programa / convocatoria académica",
+  "convocatoria": "Programa / convocatoria académica",
+  "académica": "Programa / convocatoria académica",
+  "academica": "Programa / convocatoria académica",
+  "beca": "Programa / convocatoria académica",
+  
+  "publicidad": "Publicidad / anuncio",
+  "anuncio": "Publicidad / anuncio",
+  "google": "Publicidad / anuncio",
+  "anuncio google": "Publicidad / anuncio",
+};
+
 export function normalizarArea(area = "") {
   if (!area || area === "No especificado") return "No especificado";
   
@@ -92,4 +145,22 @@ export function normalizarCarrera(carrera = "") {
   }
   
   return carrera.trim();
+}
+
+// NUEVA FUNCIÓN
+export function normalizarFuenteCaptacion(fuente = "") {
+  if (!fuente || fuente === "No especificado" || fuente.trim() === "") {
+    return "No hubo respuesta";
+  }
+  
+  const fuenteLower = fuente.toLowerCase().trim();
+  
+  for (const [key, value] of Object.entries(fuentesMap)) {
+    if (fuenteLower.includes(key)) {
+      return value;
+    }
+  }
+  
+  // Si no coincide con nada, devolver "Otros"
+  return "Otros";
 }

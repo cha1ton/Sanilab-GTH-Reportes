@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
 
               <li className="nav-item">
                 <a href="/reportes" className="nav-link text-white">
-                  Reportes P.A.
+                  Reportes Postulantes antiguos
                 </a>
               </li>
 

@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { getPostulantes } from "../../services/postulantesService";
-import { normalizarArea, normalizarCarrera } from "../../utils/normalizersCampos";
+import { normalizarArea, normalizarCarrera, normalizarFuenteCaptacion } from "../../utils/normalizersCampos";
 import BarChart from "../../components/BarChart";
 
 export default function ReportesPage() {
@@ -13,16 +13,18 @@ export default function ReportesPage() {
     universidades: {},
     areas: {},
     carreras: {},
+    fuentesCaptacion: {},
   });
 
   async function loadData() {
     const res = await getPostulantes();
 
-    // Solo normalizar áreas y carreras (universidades YA vienen limpias)
+    // Normalizar todos los campos
     const cleaned = res.map((item) => ({
       ...item,
       area: normalizarArea(item.area),
       carrera: normalizarCarrera(item.carrera),
+      fuenteCaptacion: normalizarFuenteCaptacion(item.fuenteCaptacion),
     }));
 
     setData(cleaned);
@@ -33,14 +35,16 @@ export default function ReportesPage() {
     const universidades = {};
     const areas = {};
     const carreras = {};
+    const fuentesCaptacion = {};
 
     data.forEach((item) => {
       universidades[item.universidad] = (universidades[item.universidad] || 0) + 1;
       areas[item.area] = (areas[item.area] || 0) + 1;
       carreras[item.carrera] = (carreras[item.carrera] || 0) + 1;
+      fuentesCaptacion[item.fuenteCaptacion] = (fuentesCaptacion[item.fuenteCaptacion] || 0) + 1;
     });
 
-    setStats({ universidades, areas, carreras });
+    setStats({ universidades, areas, carreras, fuentesCaptacion });
   }
 
   useEffect(() => {
@@ -92,6 +96,18 @@ export default function ReportesPage() {
           ))}
       </ul>
 
+      {/* NUEVO: FUENTES DE CAPTACIÓN */}
+      <h4 className="mt-4">📢 ¿Cómo se enteró de nuestra convocatoria?</h4>
+      <ul>
+        {Object.entries(stats.fuentesCaptacion)
+          .sort((a, b) => b[1] - a[1])
+          .map(([key, value]) => (
+            <li key={key}>
+              {key}: {value}
+            </li>
+          ))}
+      </ul>
+
       <h4 className="mt-4">📊 Top Universidades</h4>
       <BarChart dataObj={stats.universidades} title="Universidades" />
       
@@ -100,6 +116,10 @@ export default function ReportesPage() {
       
       <h4 className="mt-4">📊 Top Carreras</h4>
       <BarChart dataObj={stats.carreras} title="Carreras" />
+      
+      {/* NUEVO GRÁFICO */}
+      <h4 className="mt-4">📢 Canales de Captación</h4>
+      <BarChart dataObj={stats.fuentesCaptacion} title="Fuentes de captación" />
     </div>
   );
 }

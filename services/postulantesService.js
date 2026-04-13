@@ -33,6 +33,8 @@ export async function getPostulantes() {
         : (item["DatosFormateados - Institucion e Universidad"]?.trim() || "No especificado"),
       area: item["¿Para qué área postulas?"]?.trim() || "No especificado",
       modalidad: item["¿Cuál sería tu modalidad de trabajo?"]?.trim() || "No especificado",
+      // NUEVA COLUMNA
+      fuenteCaptacion: item["DatosFormateados - Como se entero de nuestra convocatoria"]?.trim() || "No especificado",
     }));
     
   } catch (error) {
