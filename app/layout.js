@@ -1,6 +1,7 @@
 // app/layout.js
 
 import Script from "next/script";
+import Link from "next/link";
 
 export const metadata = {
   title: "GTH System",
@@ -23,38 +24,42 @@ export default function RootLayout({ children }) {
             className="bg-dark text-white p-3"
             style={{ width: "250px", minHeight: "100vh" }}
           >
-            <h4>Reporter de Postulantes - GTH</h4>
+            <h4>
+              <Link href="/" className="text-white text-decoration-none">
+                Reporter de Postulantes - GTH
+              </Link>
+            </h4>
             <hr />
 
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a href="/onboarding" className="nav-link text-white">
+                <Link href="/onboarding" className="nav-link text-white">
                   Onboarding
-                </a>
+                </Link>
               </li>
               <hr />
               <li className="nav-item">
-                <a href="/reportes" className="nav-link text-white">
+                <Link href="/reportes" className="nav-link text-white">
                   Postulantes Antiguos
-                </a>
+                </Link>
               </li>
               <hr />
               <li className="nav-item">
-                <a href="/postulantes-actuales" className="nav-link text-white">
-                Postulantes Actuales (Wix)
-                </a>
+                <Link href="/postulantes-actuales" className="nav-link text-white">
+                  Postulantes Actuales (Wix)
+                </Link>
               </li>
 
               {/* <li className="nav-item">
-                <a href="/permisos" className="nav-link text-white">
+                <Link href="/permisos" className="nav-link text-white">
                   Permisos
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a href="/salida" className="nav-link text-white">
+                <Link href="/salida" className="nav-link text-white">
                   Salida
-                </a>
+                </Link>
               </li> */}
             </ul>
           </aside>

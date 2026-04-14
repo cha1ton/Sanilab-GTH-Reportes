@@ -73,7 +73,7 @@ export default function ReportesPage() {
 
   return (
     <div className="container-fluid">
-      <h2 className="mb-3">📊 Reporte de Postulantes</h2>
+      <h2 className="mb-3">📊 Reporte de Postulantes Antiguos</h2>
 
       {/* TOTAL */}
       <div className="alert alert-primary">
