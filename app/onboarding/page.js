@@ -11,7 +11,6 @@ export default function OnboardingPage() {
 
   async function loadData() {
     const res = await getOnboarding();
-    console.log("DATA:", res);
     const mapped = res.map((item) => ({
       id: item.id,
       nombre: item["Nombre y Apellidos"],
@@ -23,41 +22,74 @@ export default function OnboardingPage() {
       fecha: item["Fecha que se envió"],
     }));
 
-    // ORDENAR POR FECHA (más recientes primero)
     const sorted = mapped.sort((a, b) => {
       const fechaA = new Date(a.fecha || 0);
       const fechaB = new Date(b.fecha || 0);
       return fechaB - fechaA;
     });
 
-    // Muestra SOLO 20
-    const limited = sorted.slice(0, 20);
-
-    setData(limited);
+    setData(sorted.slice(0, 20));
   }
 
   useEffect(() => {
     loadData();
   }, []);
 
+  const getEstadoBadge = (estado) => {
+    const badges = {
+      "Inicio": "secondary",
+      "Creación de correo Sanilab": "info",
+      "Carta de Compromiso": "primary",
+      "Presentación con jefe de área": "warning",
+      "Leer manuales": "info",
+      "Evaluación Final": "danger",
+      "Finalizado": "success"
+    };
+    return badges[estado] || "secondary";
+  };
+
   return (
     <div>
       <h2>📌 Onboarding</h2>
-      <br></br>
-      <p>Se muestra la lista de los últimos 20 empleados en proceso de onboarding. Los empleados se muestran en orden descendente según la fecha de envío.</p>
-      <div className="mt-4">
-        {Array.isArray(data) &&
-          data.map((emp, index) => (
-            <div key={index} className="card p-3 mb-2">
-              <h5>{emp.nombre}</h5>
-              <p>📞 Celular: {emp.celular}</p>
-              <p>🎫 DNI: {emp.dni}</p>
-              <p>🎓 Carrera: {emp.carrera}</p>
-              <p>🏢 Área: {emp.area}</p>
-              <Timeline employee={emp} reload={loadData} />
+      <p className="text-muted mb-4">
+        Se muestra la lista de los últimos 20 empleados en proceso de onboarding. 
+        Ordenados por fecha de envío (más recientes primero).
+      </p>
+
+      <div className="row">
+        {data.map((emp, index) => (
+          <div key={index} className="col-12 mb-4">
+            <div className="card shadow-sm border-0">
+              <div className="card-header bg-white border-bottom pt-3">
+                <div className="d-flex justify-content-between align-items-center">
+                  <h5 className="mb-0">{emp.nombre}</h5>
+                  <span className={`badge bg-${getEstadoBadge(emp.estado)} px-3 py-2`}>
+                    {emp.estado}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="card-body">
+                {/* Información en línea */}
+                <div className="mb-4">
+                  <span className="me-3">📞 Celular: {emp.celular || "No especificado"}</span>
+                  <span className="me-3">🎫 DNI: {emp.dni || "No especificado"}</span>
+                  <span className="me-3">🎓 Carrera: {emp.carrera || "No especificado"}</span>
+                  <span>🏢 Área: {emp.area || "No especificado"}</span>
+                </div>
+
+                <Timeline employee={emp} reload={loadData} />
+              </div>
             </div>
-          ))}
+          </div>
+        ))}
       </div>
+
+      {data.length === 0 && (
+        <div className="alert alert-warning text-center">
+          No hay empleados en proceso de onboarding.
+        </div>
+      )}
     </div>
   );
 }
