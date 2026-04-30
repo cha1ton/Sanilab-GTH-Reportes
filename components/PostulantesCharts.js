@@ -137,12 +137,12 @@ export default function PostulantesCharts({ postulantes }) {
       const estadosData = Object.entries(estados);
       
       const coloresEstados = {
-        "NUEVO (FALTA AGENDAR)": "rgba(255, 193, 7, 0.6)",
+        "NUEVO (FALTA CONTACTAR)": "rgba(255, 193, 7, 0.6)",
         "CONTACTADO (SIN RESPUESTA)": "rgba(108, 117, 125, 0.6)",
         "ENTREVISTA AGENDADA": "rgba(13, 202, 240, 0.6)",
-        "EN EVALUACIÓN": "rgba(13, 110, 253, 0.6)",
-        "ACEPTADO": "rgba(25, 135, 84, 0.6)",
-        "DESCARTADO": "rgba(220, 53, 69, 0.6)"
+        "POSTULANTE DECIDIENDO": "rgba(13, 110, 253, 0.6)",
+        "ACEPTADO (CONFIRMADO)": "rgba(25, 135, 84, 0.6)",
+        "NO CONTINÚA": "rgba(220, 53, 69, 0.6)"
       };
       
       chartsRef.current.estados = new Chart(ctx, {
@@ -150,12 +150,12 @@ export default function PostulantesCharts({ postulantes }) {
         data: {
           labels: estadosData.map(([key]) => {
             const textos = {
-              "NUEVO (FALTA AGENDAR)": "🆕 Nuevo",
-              "CONTACTADO (SIN RESPUESTA)": "📞 Contactado",
-              "ENTREVISTA AGENDADA": "📅 Entrevista",
-              "EN EVALUACIÓN": "⚖️ Evaluación",
-              "ACEPTADO": "✅ Aceptado",
-              "DESCARTADO": "❌ Descartado"
+              "NUEVO (FALTA CONTACTAR)": "🆕 Nuevo (Falta contactar)",
+              "CONTACTADO (SIN RESPUESTA)": "📞 Contactado (Sin respuesta)",
+              "ENTREVISTA AGENDADA": "📅 Entrevista Agendada",
+              "POSTULANTE DECIDIENDO": "⚖️ Postulante Decidiendo",
+              "ACEPTADO (CONFIRMADO)": "✅ Aceptado (Confirmado)",
+              "NO CONTINÚA": "❌ No Ccontinúa"
             };
             return textos[key] || key;
           }),

@@ -3,12 +3,12 @@ const BASE_URL = process.env.NEXT_PUBLIC_SHEETDB_POSTULANTES_ACTUALES;
 const SHEET_NAME = encodeURIComponent("Postulantes Actualizado");
 
 export const ESTADOS_POSTULANTE = [
-  { valor: "NUEVO (FALTA AGENDAR)", label: "🆕 Nuevo (Falta agendar)", badge: "warning" },
+  { valor: "NUEVO (FALTA CONTACTAR)", label: "🆕 Nuevo (Falta contactar)", badge: "warning" },
   { valor: "CONTACTADO (SIN RESPUESTA)", label: "📞 Contactado (Sin respuesta)", badge: "secondary" },
-  { valor: "ENTREVISTA AGENDADA", label: "📅 Entrevista agendada", badge: "info" },
-  { valor: "EN EVALUACIÓN", label: "⚖️ En evaluación", badge: "primary" },
-  { valor: "ACEPTADO", label: "✅ Aceptado", badge: "success" },
-  { valor: "DESCARTADO", label: "❌ Descartado", badge: "danger" }
+  { valor: "ENTREVISTA AGENDADA", label: "📅 Entrevista Agendada", badge: "info" },
+  { valor: "POSTULANTE DECIDIENDO", label: "⚖️ Postulante Decidiendo", badge: "primary" },
+  { valor: "ACEPTADO (CONFIRMADO)", label: "✅ Aceptado (Confirmado)", badge: "success" },
+  { valor: "NO CONTINÚA", label: "❌ No Continúa", badge: "danger" }
 ];
 
 export async function getPostulantesActuales() {
@@ -35,9 +35,9 @@ export async function getPostulantesActuales() {
       // Usar el campo "id" de la hoja (minúsculas)
       const idHoja = item.id || item["id"] || index + 1;
       
-      // Obtener estado del Excel o asignar "NUEVO (FALTA AGENDAR)" si está vacío
+      // Obtener estado del Excel o asignar "NUEVO (FALTA CONTACTAR)" si está vacío
       let estadoExcel = item["Estado de Postulante"] || "";
-      let estadoInterno = estadoExcel.trim() === "" ? "NUEVO (FALTA AGENDAR)" : estadoExcel;
+      let estadoInterno = estadoExcel.trim() === "" ? "NUEVO (FALTA CONTACTAR)" : estadoExcel;
       
       return {
         id: idHoja,  // ID para actualizaciones

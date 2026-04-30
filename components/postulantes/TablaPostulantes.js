@@ -11,24 +11,24 @@ export default function TablaPostulantes({
 }) {
   const getEstadoBadge = (estado) => {
     const badges = {
-      "NUEVO (FALTA AGENDAR)": "warning",
+      "NUEVO (FALTA CONTACTAR)": "warning",
       "CONTACTADO (SIN RESPUESTA)": "secondary",
       "ENTREVISTA AGENDADA": "info",
-      "EN EVALUACIÓN": "primary",
-      "ACEPTADO": "success",
-      "DESCARTADO": "danger"
+      "POSTULANTE DECIDIENDO": "primary",
+      "ACEPTADO (CONFIRMADO)": "success",
+      "NO CONTINÚA": "danger"
     };
     return badges[estado] || "secondary";
   };
 
   const getEstadoTexto = (estado) => {
     const textos = {
-      "NUEVO (FALTA AGENDAR)": "🆕 Nuevo (Falta agendar)",
+      "NUEVO (FALTA CONTACTAR)": "🆕 Nuevo (Falta contactar)",
       "CONTACTADO (SIN RESPUESTA)": "📞 Contactado (Sin respuesta)",
-      "ENTREVISTA AGENDADA": "📅 Entrevista agendada",
-      "EN EVALUACIÓN": "⚖️ En evaluación",
-      "ACEPTADO": "✅ Aceptado",
-      "DESCARTADO": "❌ Descartado"
+      "ENTREVISTA AGENDADA": "📅 Entrevista Agendada",
+      "POSTULANTE DECIDIENDO": "⚖️ Postulante Decidiendo",
+      "ACEPTADO (CONFIRMADO)": "✅ Aceptado (Confirmado)",
+      "NO CONTINÚA": "❌ No Continúa"
     };
     return textos[estado] || estado;
   };

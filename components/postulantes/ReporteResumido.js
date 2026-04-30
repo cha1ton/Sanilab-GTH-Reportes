@@ -138,12 +138,12 @@ export default function ReporteResumido({ postulantes }) {
     
     // Mapeo de emojis para estados
     const emojiEstado = {
-      "NUEVO (FALTA AGENDAR)": "🆕",
+      "NUEVO (FALTA CONTACTAR)": "🆕",
       "CONTACTADO (SIN RESPUESTA)": "📞",
       "ENTREVISTA AGENDADA": "📅",
-      "EN EVALUACIÓN": "⚖️",
-      "ACEPTADO": "✅",
-      "DESCARTADO": "❌"
+      "POSTULANTE DECIDIENDO": "⚖️",
+      "ACEPTADO (CONFIRMADO)": "✅",
+      "NO CONTINÚA": "❌"
     };
     
     let texto = `📋 *LISTA DE POSTULANTES - SANILAB*\n`;
@@ -172,12 +172,12 @@ export default function ReporteResumido({ postulantes }) {
 
   const getNombreEstadoCorto = (estado) => {
     const textos = {
-      "NUEVO (FALTA AGENDAR)": "Nuevo",
-      "CONTACTADO (SIN RESPUESTA)": "Contactado",
-      "ENTREVISTA AGENDADA": "Entrevista",
-      "EN EVALUACIÓN": "Evaluación",
-      "ACEPTADO": "Aceptado",
-      "DESCARTADO": "Descartado"
+      "NUEVO (FALTA CONTACTAR)": "Nuevo (Falta contactar)",
+      "CONTACTADO (SIN RESPUESTA)": "Contactado (Sin respuesta)",
+      "ENTREVISTA AGENDADA": "Entrevista Agendada",
+      "POSTULANTE DECIDIENDO": "Postulante Decidiendo",
+      "ACEPTADO (CONFIRMADO)": "Aceptado (Confirmado)",
+      "NO CONTINÚA": "No Continúa"
     };
     return textos[estado] || estado;
   };

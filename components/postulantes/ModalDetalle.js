@@ -4,12 +4,12 @@
 export default function ModalDetalle({ postulante }) {
   const getEstadoTexto = (estado) => {
     const textos = {
-      "NUEVO (FALTA AGENDAR)": "🆕 Nuevo (Falta agendar)",
+      "NUEVO (FALTA CONTACTAR)": "🆕 Nuevo (Falta contactar)",
       "CONTACTADO (SIN RESPUESTA)": "📞 Contactado (Sin respuesta)",
-      "ENTREVISTA AGENDADA": "📅 Entrevista agendada",
-      "EN EVALUACIÓN": "⚖️ En evaluación",
-      "ACEPTADO": "✅ Aceptado",
-      "DESCARTADO": "❌ Descartado"
+      "ENTREVISTA AGENDADA": "📅 Entrevista Agendada",
+      "POSTULANTE DECIDIENDO": "⚖️ Postulante Decidiendo",
+      "ACEPTADO (CONFIRMADO)": "✅ Aceptado (Confirmado)",
+      "NO CONTINÚA": "❌ No Continúa"
     };
     return textos[estado] || estado;
   };
