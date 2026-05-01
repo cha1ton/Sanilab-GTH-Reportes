@@ -156,10 +156,10 @@ export default function ReporteResumido({ postulantes }) {
     } else {
       datos.forEach((p, idx) => {
         const estadoEmoji = emojiEstado[p.estado_postulante] || "📌";
-        texto += `${idx + 1}. ${p.nombre}\n`;
-        texto += `   📱 ${p.telefono || "No especificado"} | 🎓 ${p.carrera}\n`;
+        texto += `${idx + 1}. ${p.nombre} | 📱 ${p.telefono || "No especificado"}\n`;
+        texto += `   🎓 ${p.carrera} | 📍 ${p.universidad}\n`; 
         texto += `   🏢 ${p.area} | ${estadoEmoji} ${getNombreEstadoCorto(p.estado_postulante)}\n`;
-        texto += `   📅 ${p.fecha_envio ? new Date(p.fecha_envio).toLocaleDateString('es-PE') : "Fecha no disponible"}\n`;
+        texto += `   📅 Fecha de Postulación: ${p.fecha_envio ? new Date(p.fecha_envio).toLocaleDateString('es-PE') : "Fecha no disponible"}\n`;
         if (idx < datos.length - 1) texto += `\n`;
       });
     }
